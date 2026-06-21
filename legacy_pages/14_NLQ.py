@@ -11,6 +11,14 @@ import json
 import os
 
 from theme import apply_theme, get_theme
+def _get_groq_key() -> str:
+    key = os.environ.get("GROQ_API_KEY", "")
+    if key:
+        return key
+    try:
+        return st.secrets.get("GROQ_API_KEY", "")
+    except Exception:
+        return ""
 
 st.set_page_config(page_title="ArchiShield — Ask Your Model", page_icon="💬", layout="wide")
 _t = apply_theme()
@@ -293,7 +301,7 @@ def ask_groq(question: str, model_context: dict) -> str:
         return ("⚠️ The `groq` package is not installed. "
                 "Run `pip install groq` in your environment.")
 
-    api_key = os.environ.get("GROQ_API_KEY", "")
+    api_key = _get_groq_key()
     if not api_key:
         return ("⚠️ No GROQ_API_KEY found in environment variables. "
                 "Set it before using this page — see the setup note below.")
@@ -384,7 +392,7 @@ else:
 # ══════════════════════════════════════════════════════════════════════════════
 # SETUP NOTE (only shown if no API key detected)
 # ══════════════════════════════════════════════════════════════════════════════
-if not os.environ.get("GROQ_API_KEY"):
+if not _get_groq_key():
     st.markdown("---")
     with st.expander("⚙️ Setup required — Groq API key"):
         st.markdown("""
