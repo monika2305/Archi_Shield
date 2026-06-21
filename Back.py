@@ -10,7 +10,7 @@ st.set_page_config(
 
 # ── If already logged in, skip to main app ─────────────────────────────────
 if st.session_state.get("logged_in"):
-    st.switch_page("pages/Home.py")
+    st.switch_page("pages/0_Home.py")
 
 
 def render_html_block(html: str) -> None:
