@@ -1194,6 +1194,6 @@ render_html_block("""
 _, col_btn2, _ = st.columns([3, 2, 3])
 with col_btn2:
     if st.button("→  Try Now — It's Free", key="btn_cta", type="primary", use_container_width=True):
-        st.switch_page("pages/Home.py")
+        st.switch_page("pages/0_Home.py")
 
 st.markdown("<div class='cta-footer'></div>", unsafe_allow_html=True)
